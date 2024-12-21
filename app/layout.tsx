@@ -6,14 +6,14 @@ import { Inter } from "next/font/google";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Continental",
+  title: "Contador de puntos para Continental",
   description: "Juego de cartas Continental",
 };
 
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#000000",
+  themeColor: "#f8f8f8",
 };
 
 export default function RootLayout({
