@@ -2,7 +2,7 @@
 
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Input } from '@/components/ui/input';
-import { GameState, Player, Round } from '@/types/game';
+import { GameState } from '@/types/game';
 
 interface ScoreTableProps {
   gameState: GameState;
