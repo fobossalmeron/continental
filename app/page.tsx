@@ -13,11 +13,11 @@ export default function Home() {
   return (
     <main className="min-h-screen">
       <div className="container mx-auto py-8 px-4">
-        <h1 className="sm:text-4xl text-3xl font-bold mb-8">Continental</h1>
+        <h1 className="sm:text-4xl text-2xl font-bold mb-8 max-w-[250px]">Contador de puntos para Continental 🃏</h1>
         
         <div className="space-y-8">
           <div className="space-y-4">
-            <h2 className="text-2xl font-semibold">Jugadores</h2>
+            <h2 className="text-xl font-semibold">Jugadores</h2>
             <AddPlayer onAddPlayer={addPlayer} />
           </div>
 
