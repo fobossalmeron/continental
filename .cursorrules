@@ -1,0 +1,2 @@
+usa types/game.ts como la fuente de verdad para los tipos de datos, siempre importa de ahí
+estamos usando yarn y tailwind

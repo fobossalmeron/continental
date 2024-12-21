@@ -13,7 +13,7 @@ export default function Home() {
   return (
     <main className="min-h-screen">
       <div className="container mx-auto py-8 px-4">
-        <h1 className="sm:text-4xl text-2xl font-bold mb-8 max-w-[250px]">Contador de puntos para Continental 🃏</h1>
+        <h1 className="sm:text-2xl text-2xl font-bold mb-8 max-w-[250px]">Contador de puntos para Continental 🃏</h1>
         
         <div className="space-y-8">
           <div className="space-y-4">
@@ -21,7 +21,11 @@ export default function Home() {
             <AddPlayer onAddPlayer={addPlayer} />
           </div>
 
-          {gameState.players.length > 0 && (
+          {gameState.players.length === 0 ? (
+            <div className="text-center p-4 text-gray-500">
+              Agrega jugadores para comenzar la partida
+            </div>
+          ) : (
             <div className="space-y-4">
               <div className="flex justify-between items-center">
                 <h2 className="text-2xl font-semibold">Rondas</h2>
@@ -31,9 +35,9 @@ export default function Home() {
                 </Button>
               </div>
 
-              <ScoreTable
+              <ScoreTable 
                 gameState={gameState}
-                onUpdateScore={updateScore}
+                updateScore={updateScore}
                 getPlayerTotal={getPlayerTotal}
               />
 

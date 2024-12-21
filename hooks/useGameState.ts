@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState } from 'react';
 import { GameState, Player, Round } from '@/types/game';
 
 const STORAGE_KEY = 'continental-game-state';
@@ -10,14 +10,52 @@ const initialState: GameState = {
   rounds: [],
 };
 
+const generateId = () => {
+  return `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+};
+
 export function useGameState() {
   const [gameState, setGameState] = useState<GameState>(initialState);
-  const nextId = useRef(1);
 
   useEffect(() => {
     const stored = localStorage.getItem(STORAGE_KEY);
     if (stored) {
-      setGameState(JSON.parse(stored));
+      try {
+        const parsedState = JSON.parse(stored);
+        
+        // Crear un mapa de IDs viejos a nuevos para los jugadores
+        const playerIdMap: { [oldId: string]: string } = {};
+        const migratedPlayers = parsedState.players.map((player: Player) => {
+          const newId = generateId();
+          playerIdMap[player.id] = newId;
+          return { ...player, id: newId };
+        });
+
+        // Migrar las rondas manteniendo la relación con los scores
+        const migratedRounds = parsedState.rounds.map((round: Round) => {
+          const newScores: { [key: string]: number } = {};
+          // Actualizar los IDs de los jugadores en los scores
+          Object.entries(round.scores).forEach(([oldPlayerId, score]) => {
+            const newPlayerId = playerIdMap[oldPlayerId];
+            if (newPlayerId) {
+              newScores[newPlayerId] = score;
+            }
+          });
+
+          return {
+            id: generateId(),
+            scores: newScores,
+          };
+        });
+
+        setGameState({
+          players: migratedPlayers,
+          rounds: migratedRounds,
+        });
+      } catch (error) {
+        console.error('Error al cargar el estado:', error);
+        localStorage.removeItem(STORAGE_KEY);
+      }
     }
   }, []);
 
@@ -27,7 +65,7 @@ export function useGameState() {
 
   const addPlayer = (name: string) => {
     const newPlayer: Player = {
-      id: String(nextId.current++),
+      id: generateId(),
       name,
     };
     setGameState(prev => ({
@@ -38,7 +76,7 @@ export function useGameState() {
 
   const addRound = () => {
     const newRound: Round = {
-      id: String(nextId.current++),
+      id: generateId(),
       scores: {},
     };
     setGameState(prev => ({
@@ -75,6 +113,10 @@ export function useGameState() {
     }, 0);
   };
 
+  const hasPlayers = (): boolean => {
+    return gameState.players.length > 0;
+  };
+
   return {
     gameState,
     addPlayer,
@@ -82,5 +124,6 @@ export function useGameState() {
     updateScore,
     resetGame,
     getPlayerTotal,
+    hasPlayers,
   };
 }

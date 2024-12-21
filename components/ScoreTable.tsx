@@ -2,55 +2,63 @@
 
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Input } from '@/components/ui/input';
-import { GameState } from '@/types/game';
+import { GameState, Player, Round } from '@/types/game';
 
 interface ScoreTableProps {
   gameState: GameState;
-  onUpdateScore: (roundId: string, playerId: string, score: number) => void;
+  updateScore: (roundId: string, playerId: string, score: number) => void;
   getPlayerTotal: (playerId: string) => number;
 }
 
-export function ScoreTable({ gameState, onUpdateScore, getPlayerTotal }: ScoreTableProps) {
+export function ScoreTable({ gameState, updateScore, getPlayerTotal }: ScoreTableProps) {
+  if (gameState.players.length === 0) {
+    return (
+      <div className="text-center p-4 text-gray-500">
+        Agrega jugadores para comenzar la partida
+      </div>
+    );
+  }
+
   return (
     <div className="rounded-md border">
-      <div className="overflow-auto">
-        <div className="sticky top-0 bg-background z-50">
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead className="w-[100px]">Ronda</TableHead>
-                {gameState.players.map((player) => (
-                  <TableHead key={player.id} className="min-w-[120px]">
-                    {player.name}
-                  </TableHead>
-                ))}
-              </TableRow>
-            </TableHeader>
-          </Table>
-        </div>
+      <div className="overflow-x-auto">
         <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead className="text-center w-[80px]">Ronda</TableHead>
+              {gameState.players.map((player) => (
+                <TableHead key={player.id} className="text-center min-w-[100px] sm:min-w-[120px]">
+                  {player.name}
+                </TableHead>
+              ))}
+            </TableRow>
+          </TableHeader>
           <TableBody>
             {gameState.rounds.map((round, index) => (
               <TableRow key={round.id}>
-                <TableCell className="font-medium">{index + 1}</TableCell>
+                <TableCell className="text-center font-medium">
+                  {index + 1}
+                </TableCell>
                 {gameState.players.map((player) => (
-                  <TableCell key={player.id} className="min-w-[120px]">
-                    <Input
-                      type="number"
-                      value={round.scores[player.id] || ''}
-                      onChange={(e) =>
-                        onUpdateScore(round.id, player.id, parseInt(e.target.value) || 0)
-                      }
-                      className="w-20 text-base"
-                    />
+                  <TableCell key={player.id} className="p-0">
+                    <div className="flex justify-center p-2">
+                      <Input
+                        type="number"
+                        value={round.scores[player.id] || ''}
+                        onChange={(e) =>
+                          updateScore(round.id, player.id, parseInt(e.target.value) || 0)
+                        }
+                        className="w-16 sm:w-24 text-center"
+                      />
+                    </div>
                   </TableCell>
                 ))}
               </TableRow>
             ))}
             <TableRow className="bg-muted/50">
-              <TableCell className="font-medium">Total</TableCell>
+              <TableCell className="text-center font-medium">Total</TableCell>
               {gameState.players.map((player) => (
-                <TableCell key={player.id} className="font-bold min-w-[120px]">
+                <TableCell key={player.id} className="text-center font-bold min-w-[100px] sm:min-w-[120px]">
                   {getPlayerTotal(player.id)}
                 </TableCell>
               ))}
