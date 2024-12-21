@@ -24,7 +24,7 @@ export function ResetGameDialog({ onReset }: ResetGameDialogProps) {
       <AlertDialogTrigger asChild>
         <Button variant="secondary" size="lg">
           <RefreshCcw className="mr-2 h-4 w-4" />
-          Reiniciar Juego
+          Nuevo juego
         </Button>
       </AlertDialogTrigger>
       <AlertDialogContent>
@@ -36,7 +36,7 @@ export function ResetGameDialog({ onReset }: ResetGameDialogProps) {
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancelar</AlertDialogCancel>
-          <AlertDialogAction onClick={onReset}>Reiniciar Juego</AlertDialogAction>
+          <AlertDialogAction onClick={onReset}>Nuevo juego</AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>

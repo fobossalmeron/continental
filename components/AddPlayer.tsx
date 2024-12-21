@@ -27,7 +27,7 @@ export function AddPlayer({ onAddPlayer }: AddPlayerProps) {
         value={name}
         onChange={(e) => setName(e.target.value)}
         placeholder="Nombre del jugador"
-        className="max-w-xs"
+        className="max-w-xs text-base"
       />
       <Button type="submit" variant="secondary">
         <UserPlus className="mr-2 h-4 w-4" />

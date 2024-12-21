@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { GameState, Player, Round } from '@/types/game';
 
 const STORAGE_KEY = 'continental-game-state';
@@ -12,6 +12,7 @@ const initialState: GameState = {
 
 export function useGameState() {
   const [gameState, setGameState] = useState<GameState>(initialState);
+  const nextId = useRef(1);
 
   useEffect(() => {
     const stored = localStorage.getItem(STORAGE_KEY);
@@ -26,7 +27,7 @@ export function useGameState() {
 
   const addPlayer = (name: string) => {
     const newPlayer: Player = {
-      id: crypto.randomUUID(),
+      id: String(nextId.current++),
       name,
     };
     setGameState(prev => ({
@@ -37,7 +38,7 @@ export function useGameState() {
 
   const addRound = () => {
     const newRound: Round = {
-      id: crypto.randomUUID(),
+      id: String(nextId.current++),
       scores: {},
     };
     setGameState(prev => ({
