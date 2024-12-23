@@ -3,6 +3,7 @@ import type { Metadata, Viewport } from "next";
 import Script from "next/script";
 import { Inter } from "next/font/google";
 import { GoogleAnalytics } from '@next/third-parties/google'
+import { InstallPrompt } from '@/components/InstallPrompt'
 
 
 const inter = Inter({ subsets: ["latin"] });
@@ -17,12 +18,18 @@ export const metadata: Metadata = {
     type: "website",
     locale: "es_ES",
   },
+  manifest: '/manifest.json',
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: 'black-translucent',
+    title: 'Continental',
+  },
 };
 
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#f8f8f8",
+  themeColor: "hsl(var(--background))",
 };
 
 export default function RootLayout({
@@ -33,7 +40,7 @@ export default function RootLayout({
   return (
     <html lang="es">
       <head>
-        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <Script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2509995047108497"
@@ -41,7 +48,10 @@ export default function RootLayout({
           strategy="afterInteractive"
         />
       </head>
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        {children}
+        <InstallPrompt />
+      </body>
       <GoogleAnalytics gaId="G-LKFZ1ZYJE4" />
 
     </html>

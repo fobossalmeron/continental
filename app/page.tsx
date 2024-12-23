@@ -1,23 +1,30 @@
 "use client";
 
-import { useGameState } from '@/hooks/useGameState';
-import { AddPlayer } from '@/components/AddPlayer';
-import { ScoreTable } from '@/components/ScoreTable';
-import { ResetGameDialog } from '@/components/ResetGameDialog';
-import { GameRules } from '@/components/GameRules';
+import { useGameState } from "@/hooks/useGameState";
+import { AddPlayer } from "@/components/AddPlayer";
+import { ScoreTable } from "@/components/ScoreTable";
+import { ResetGameDialog } from "@/components/ResetGameDialog";
+import { GameRules } from "@/components/GameRules";
 
 export default function Home() {
-  const { gameState, addPlayer, addRound, updateScore, resetGame, getPlayerTotal } = useGameState();
+  const {
+    gameState,
+    addPlayer,
+    addRound,
+    updateScore,
+    resetGame,
+    getPlayerTotal,
+  } = useGameState();
 
   return (
     <main className="min-h-screen">
-      <div className="container mx-auto py-8 px-4 min-h-[800px]">
+      <div className="container mx-auto py-10 px-4 min-h-[800px]">
         <header className="mb-8">
-          <h1 className="sm:text-2xl text-2xl font-semibold max-w-[250px]">
-            Contador de puntos para Continental ♣
+          <h1 className="text-2xl font-semibold max-w-[280px]">
+            Contador Continental ♣
           </h1>
-          <p className="text-muted-foreground mt-2">
-            Lleva el control de tus partidas sin papel
+          <p className="text-muted-foreground mt-2 text-sm">
+            Lleva los puntos de tus partidas sin papel.
           </p>
         </header>
 
@@ -34,7 +41,7 @@ export default function Home() {
               <h2 className="text-lg font-semibold">Rondas</h2>
             </div>
 
-            <ScoreTable 
+            <ScoreTable
               gameState={gameState}
               updateScore={updateScore}
               getPlayerTotal={getPlayerTotal}

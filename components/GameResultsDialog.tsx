@@ -42,7 +42,7 @@ export function GameResultsDialog({
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
-          <DialogTitle className="text-center text-xl">Resultados 🏆</DialogTitle>
+          <DialogTitle className="text-center text-xl">Resultados <span className="text-3xl">♕</span></DialogTitle>
         </DialogHeader>
         <div className="space-y-4 py-4">
           {playerScores.map((playerScore, index) => (

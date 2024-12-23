@@ -33,15 +33,15 @@ export function GameRules() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <Card>
-            <CardHeader>
+            <CardHeader className="p-4">
               <CardTitle className="text-lg font-semibold text-foreground">
                 Combinaciones por ronda
               </CardTitle>
             </CardHeader>
-            <CardContent>
+            <CardContent className="p-0">
               <Table className="w-full">
                 <TableHeader>
-                  <TableRow>
+                  <TableRow className="hover:bg-transparent">
                     <TableHead>Ronda</TableHead>
                     <TableHead>Combinación</TableHead>
                     <TableHead className="text-right">Cartas</TableHead>
@@ -49,7 +49,7 @@ export function GameRules() {
                 </TableHeader>
                 <TableBody>
                   {rounds.map((round) => (
-                    <TableRow key={round.round}>
+                    <TableRow key={round.round} className="text-muted-foreground">
                       <TableCell>{round.round}</TableCell>
                       <TableCell>{round.combination}</TableCell>
                       <TableCell className="text-right">
@@ -63,22 +63,22 @@ export function GameRules() {
           </Card>
 
           <Card>
-            <CardHeader>
+            <CardHeader className="p-4">
               <CardTitle className="text-lg font-semibold text-foreground">
                 Valor de las cartas
               </CardTitle>
             </CardHeader>
-            <CardContent>
+            <CardContent className="p-0">
               <Table className="w-full">
                 <TableHeader>
-                  <TableRow>
-                    <TableHead>Tipo de carta</TableHead>
+                <TableRow className="hover:bg-transparent">
+                <TableHead>Tipo de carta</TableHead>
                     <TableHead className="text-right">Puntos</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
                   {cardValues.map((card) => (
-                    <TableRow key={card.type}>
+                    <TableRow key={card.type} className="text-muted-foreground">
                       <TableCell>{card.type}</TableCell>
                       <TableCell className="text-right">
                         {typeof card.value === "number"
