@@ -29,7 +29,7 @@ export function AddPlayer({ onAddPlayer }: AddPlayerProps) {
         placeholder="Nombre del jugador"
         className="max-w-xs text-base"
       />
-      <Button type="submit" variant="secondary">
+      <Button type="submit" variant="default">
         <UserPlus className="mr-2 h-4 w-4" />
         Agregar
       </Button>

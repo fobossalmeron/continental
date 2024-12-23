@@ -6,6 +6,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 
 const rounds = [
   { round: "1ª", combination: "Dos tercias", cards: 7 },
@@ -31,53 +32,65 @@ export function GameRules() {
         <h2 className="text-xl font-semibold mb-6">Reglas</h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <section>
-            <h3 className="text-lg font-semibold mb-4">
-              Combinaciones por ronda
-            </h3>
-            <Table className="w-full">
-              <TableHeader>
-                <TableRow>
-                  <TableHead>Ronda</TableHead>
-                  <TableHead>Combinación</TableHead>
-                  <TableHead className="text-right">Cartas</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {rounds.map((round) => (
-                  <TableRow key={round.round}>
-                    <TableCell>{round.round}</TableCell>
-                    <TableCell>{round.combination}</TableCell>
-                    <TableCell className="text-right">{round.cards}</TableCell>
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-lg font-semibold text-foreground">
+                Combinaciones por ronda
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <Table className="w-full">
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>Ronda</TableHead>
+                    <TableHead>Combinación</TableHead>
+                    <TableHead className="text-right">Cartas</TableHead>
                   </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </section>
+                </TableHeader>
+                <TableBody>
+                  {rounds.map((round) => (
+                    <TableRow key={round.round}>
+                      <TableCell>{round.round}</TableCell>
+                      <TableCell>{round.combination}</TableCell>
+                      <TableCell className="text-right">
+                        {round.cards}
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </CardContent>
+          </Card>
 
-          <section>
-            <h3 className="text-lg font-semibold mb-4">Valor de las cartas</h3>
-            <Table className="w-full">
-              <TableHeader>
-                <TableRow>
-                  <TableHead>Tipo de carta</TableHead>
-                  <TableHead className="text-right">Puntos</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {cardValues.map((card) => (
-                  <TableRow key={card.type}>
-                    <TableCell>{card.type}</TableCell>
-                    <TableCell className="text-right">
-                      {typeof card.value === "number"
-                        ? `${card.value} puntos`
-                        : card.value}
-                    </TableCell>
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-lg font-semibold text-foreground">
+                Valor de las cartas
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <Table className="w-full">
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>Tipo de carta</TableHead>
+                    <TableHead className="text-right">Puntos</TableHead>
                   </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </section>
+                </TableHeader>
+                <TableBody>
+                  {cardValues.map((card) => (
+                    <TableRow key={card.type}>
+                      <TableCell>{card.type}</TableCell>
+                      <TableCell className="text-right">
+                        {typeof card.value === "number"
+                          ? `${card.value} puntos`
+                          : card.value}
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </CardContent>
+          </Card>
         </div>
       </div>
     </footer>

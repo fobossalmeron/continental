@@ -13,8 +13,8 @@ export default function Home() {
     <main className="min-h-screen">
       <div className="container mx-auto py-8 px-4 min-h-[800px]">
         <header className="mb-8">
-          <h1 className="sm:text-3xl text-2xl font-bold max-w-[350px]">
-            Contador de puntos para Continental 🃏
+          <h1 className="sm:text-2xl text-2xl font-semibold max-w-[250px]">
+            Contador de puntos para Continental ♣
           </h1>
           <p className="text-muted-foreground mt-2">
             Lleva el control de tus partidas sin papel
@@ -24,14 +24,14 @@ export default function Home() {
         <article className="space-y-8">
           {gameState.rounds.length < 3 && (
             <div className="space-y-4">
-              <h2 className="text-xl font-semibold">Jugadores</h2>
+              <h2 className="text-lg font-semibold">Jugadores</h2>
               <AddPlayer onAddPlayer={addPlayer} />
             </div>
           )}
 
           <section className="space-y-4">
             <div className="flex justify-between items-center">
-              <h2 className="text-xl font-semibold">Rondas</h2>
+              <h2 className="text-lg font-semibold">Rondas</h2>
             </div>
 
             <ScoreTable 

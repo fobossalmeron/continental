@@ -31,8 +31,8 @@ export function ResetGameDialog({ onReset }: ResetGameDialogProps) {
       <DialogContent>
         <DialogHeader>
           <DialogTitle className="text-xl">¿Estás seguro?</DialogTitle>
-          <DialogDescription>
-            Esta acción no se puede deshacer. Se eliminarán todos los jugadores y puntuaciones.
+          <DialogDescription className="text-base">
+            Esta acción no se puede deshacer. Se perderán todos los jugadores y puntuaciones.
           </DialogDescription>
         </DialogHeader>
         <DialogFooter className="flex-col gap-2 sm:flex-row">
@@ -45,7 +45,7 @@ export function ResetGameDialog({ onReset }: ResetGameDialogProps) {
             size="xlg"
             className="w-full sm:w-auto"
           >
-            <RotateCcw className="mr-2 h-4 w-4" />
+            <RefreshCcw className="mr-2 h-4 w-4" />
             Nueva partida
           </Button>
           <Button 

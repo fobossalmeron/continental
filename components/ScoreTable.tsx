@@ -4,7 +4,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { Input } from '@/components/ui/input';
 import { GameState } from '@/types/game';
 import { Button } from '@/components/ui/button';
-import { PlusCircle } from 'lucide-react';
+import { PlusCircle, PlayCircle, CheckCircle } from 'lucide-react';
 import { GameResultsDialog } from './GameResultsDialog';
 import { useState } from 'react';
 
@@ -19,6 +19,25 @@ interface ScoreTableProps {
 export function ScoreTable({ gameState, updateScore, getPlayerTotal, addRound, resetGame }: ScoreTableProps) {
   const [showResults, setShowResults] = useState(false);
   
+  const getButtonConfig = () => {
+    if (gameState.rounds.length === 0) {
+      return {
+        text: 'Iniciar partida',
+        icon: <PlayCircle className="mr-2 h-4 w-4" />
+      };
+    }
+    if (gameState.rounds.length === 7) {
+      return {
+        text: 'Terminar',
+        icon: <CheckCircle className="mr-2 h-4 w-4" />
+      };
+    }
+    return {
+      text: 'Siguiente',
+      icon: <PlusCircle className="mr-2 h-4 w-4" />
+    };
+  };
+
   // Función para verificar si la ronda actual está completa
   const isCurrentRoundComplete = () => {
     if (gameState.rounds.length === 0) return true; // Para permitir iniciar la partida
@@ -53,7 +72,7 @@ export function ScoreTable({ gameState, updateScore, getPlayerTotal, addRound, r
                 </TableHead>
               ) : (
                 gameState.players.map((player) => (
-                  <TableHead key={player.id} className="text-center min-w-[100px] sm:min-w-[120px]">
+                  <TableHead key={player.id} className="text-center min-w-[100px] sm:min-w-[120px] text-foreground">
                     {player.name}
                   </TableHead>
                 ))
@@ -89,9 +108,10 @@ export function ScoreTable({ gameState, updateScore, getPlayerTotal, addRound, r
                   onClick={handleNextRoundClick} 
                   variant="default"
                   disabled={!isCurrentRoundComplete() || gameState.players.length === 0}
+                  className="w-full"
                 >
-                  <PlusCircle className="mr-2 h-4 w-4" />
-                  Iniciar partida
+                  {getButtonConfig().icon}
+                  {getButtonConfig().text}
                 </Button>
               </TableCell>
               {gameState.players.length === 0 ? (

@@ -8,7 +8,7 @@ import {
   DialogFooter,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { RefreshCcw } from "lucide-react";
+import { RotateCcw } from "lucide-react";
 import { Player } from "@/types/game";
 
 interface PlayerScore {
@@ -79,7 +79,8 @@ export function GameResultsDialog({
             size="xlg"
             className="w-full sm:w-auto order-1 sm:order-2"
           >
-            <RefreshCcw className="mr-2 h-4 w-4" />
+            <RotateCcw className="mr-2 h-4 w-4" />
+            
             Nueva partida
           </Button>
         </DialogFooter>
