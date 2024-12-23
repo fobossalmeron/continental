@@ -4,7 +4,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { Input } from '@/components/ui/input';
 import { GameState } from '@/types/game';
 import { Button } from '@/components/ui/button';
-import { PlusCircle, Check } from 'lucide-react';
+import { PlusCircle } from 'lucide-react';
 import { GameResultsDialog } from './GameResultsDialog';
 import { useState } from 'react';
 
