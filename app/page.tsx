@@ -29,16 +29,13 @@ export default function Home() {
             <div className="space-y-4">
               <div className="flex justify-between items-center">
                 <h2 className="text-2xl font-semibold">Rondas</h2>
-                <Button onClick={addRound} variant="default">
-                  <PlusCircle className="mr-2 h-4 w-4" />
-                  Nueva ronda
-                </Button>
               </div>
 
               <ScoreTable 
                 gameState={gameState}
                 updateScore={updateScore}
                 getPlayerTotal={getPlayerTotal}
+                addRound={addRound}
               />
 
               <div className="flex justify-center mt-8">
