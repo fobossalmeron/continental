@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   keywords: "continental, juego de cartas, contador de puntos, puntuación continental, juegos de mesa",
   openGraph: {
     title: "Contador de puntos para Continental",
-    description: "Lleva el control de tus partidas de Continental de forma fácil y rápida",
+    description: "Lleva el control de tus partidas de Continental sin papel",
     type: "website",
     locale: "es_ES",
   },
