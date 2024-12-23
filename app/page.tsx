@@ -36,6 +36,7 @@ export default function Home() {
                 updateScore={updateScore}
                 getPlayerTotal={getPlayerTotal}
                 addRound={addRound}
+                resetGame={resetGame}
               />
 
               <div className="flex justify-center mt-8">
