@@ -6,7 +6,7 @@ import { GameState } from '@/types/game';
 
 interface ScoreTableProps {
   gameState: GameState;
-  updateScore: (roundId: string, playerId: string, score: number) => void;
+  updateScore: (roundId: string, playerId: string, score: number | null) => void;
   getPlayerTotal: (playerId: string) => number;
 }
 
@@ -44,10 +44,11 @@ export function ScoreTable({ gameState, updateScore, getPlayerTotal }: ScoreTabl
                     <div className="flex justify-center p-2">
                       <Input
                         type="number"
-                        value={round.scores[player.id] || ''}
-                        onChange={(e) =>
-                          updateScore(round.id, player.id, parseInt(e.target.value) || 0)
-                        }
+                        value={round.scores[player.id] ?? ''}
+                        onChange={(e) => {
+                          const value = e.target.value === '' ? null : parseInt(e.target.value);
+                          updateScore(round.id, player.id, value);
+                        }}
                         className="w-16 sm:w-24 text-center"
                       />
                     </div>

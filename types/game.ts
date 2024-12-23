@@ -5,7 +5,7 @@ export interface Player {
 
 export interface Round {
   id: string;
-  scores: { [playerId: string]: number };
+  scores: { [playerId: string]: number | null };
 }
 
 export interface GameState {

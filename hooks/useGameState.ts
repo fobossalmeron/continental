@@ -33,7 +33,7 @@ export function useGameState() {
 
         // Migrar las rondas manteniendo la relación con los scores
         const migratedRounds = parsedState.rounds.map((round: Round) => {
-          const newScores: { [key: string]: number } = {};
+          const newScores: { [key: string]: number | null } = {};
           // Actualizar los IDs de los jugadores en los scores
           Object.entries(round.scores).forEach(([oldPlayerId, score]) => {
             const newPlayerId = playerIdMap[oldPlayerId];
@@ -85,7 +85,7 @@ export function useGameState() {
     }));
   };
 
-  const updateScore = (roundId: string, playerId: string, score: number) => {
+  const updateScore = (roundId: string, playerId: string, score: number | null) => {
     setGameState(prev => ({
       ...prev,
       rounds: prev.rounds.map(round =>
@@ -109,7 +109,8 @@ export function useGameState() {
 
   const getPlayerTotal = (playerId: string): number => {
     return gameState.rounds.reduce((total, round) => {
-      return total + (round.scores[playerId] || 0);
+      const score = round.scores[playerId];
+      return total + (score ?? 0);
     }, 0);
   };
 
