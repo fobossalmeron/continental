@@ -22,29 +22,23 @@ export default function Home() {
             </div>
           )}
 
-          {gameState.players.length === 0 ? (
-            <div className="text-center p-4 text-gray-500">
-              Agrega jugadores para comenzar la partida
+          <div className="space-y-4">
+            <div className="flex justify-between items-center">
+              <h2 className="text-xl font-semibold">Rondas</h2>
             </div>
-          ) : (
-            <div className="space-y-4">
-              <div className="flex justify-between items-center">
-                <h2 className="text-xl font-semibold">Rondas</h2>
-              </div>
 
-              <ScoreTable 
-                gameState={gameState}
-                updateScore={updateScore}
-                getPlayerTotal={getPlayerTotal}
-                addRound={addRound}
-                resetGame={resetGame}
-              />
+            <ScoreTable 
+              gameState={gameState}
+              updateScore={updateScore}
+              getPlayerTotal={getPlayerTotal}
+              addRound={addRound}
+              resetGame={resetGame}
+            />
 
-              <div className="flex justify-center mt-8">
-                <ResetGameDialog onReset={resetGame} />
-              </div>
+            <div className="flex justify-center mt-8">
+              <ResetGameDialog onReset={resetGame} />
             </div>
-          )}
+          </div>
         </div>
       </div>
 

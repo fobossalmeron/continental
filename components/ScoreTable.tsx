@@ -40,14 +40,6 @@ export function ScoreTable({ gameState, updateScore, getPlayerTotal, addRound, r
     }
   };
 
-  if (gameState.players.length === 0) {
-    return (
-      <div className="text-center p-4 text-gray-500">
-        Agrega jugadores para comenzar la partida
-      </div>
-    );
-  }
-
   return (
     <div className="rounded-md border">
       <div className="overflow-x-auto">
@@ -55,11 +47,17 @@ export function ScoreTable({ gameState, updateScore, getPlayerTotal, addRound, r
           <TableHeader>
             <TableRow>
               <TableHead className="text-center w-[80px]">Ronda</TableHead>
-              {gameState.players.map((player) => (
-                <TableHead key={player.id} className="text-center min-w-[100px] sm:min-w-[120px]">
-                  {player.name}
+              {gameState.players.length === 0 ? (
+                <TableHead className="text-center min-w-[100px] sm:min-w-[120px]">
+                  Jugador
                 </TableHead>
-              ))}
+              ) : (
+                gameState.players.map((player) => (
+                  <TableHead key={player.id} className="text-center min-w-[100px] sm:min-w-[120px]">
+                    {player.name}
+                  </TableHead>
+                ))
+              )}
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -90,32 +88,35 @@ export function ScoreTable({ gameState, updateScore, getPlayerTotal, addRound, r
                 <Button 
                   onClick={handleNextRoundClick} 
                   variant="default"
-                  disabled={!isCurrentRoundComplete()}
+                  disabled={!isCurrentRoundComplete() || gameState.players.length === 0}
                 >
-                  {isGameComplete ? (
-                    <>
-                      <Check className="mr-2 h-4 w-4" />
-                      Terminar
-                    </>
-                  ) : (
-                    <>
-                      <PlusCircle className="mr-2 h-4 w-4" />
-                      {gameState.rounds.length === 0 ? "Iniciar partida" : "Siguiente"}
-                    </>
-                  )}
+                  <PlusCircle className="mr-2 h-4 w-4" />
+                  Iniciar partida
                 </Button>
               </TableCell>
-              {gameState.players.map((player) => (
-                <TableCell key={player.id} />
-              ))}
+              {gameState.players.length === 0 ? (
+                <TableCell className="text-center text-gray-500 text-base">
+                  Agrega jugadores para comenzar
+                </TableCell>
+              ) : (
+                gameState.players.map((player) => (
+                  <TableCell key={player.id} />
+                ))
+              )}
             </TableRow>
             <TableRow className="bg-muted/50">
               <TableCell className="text-center font-medium">Total</TableCell>
-              {gameState.players.map((player) => (
-                <TableCell key={player.id} className="text-center font-bold min-w-[100px] sm:min-w-[120px]">
-                  {getPlayerTotal(player.id)}
+              {gameState.players.length === 0 ? (
+                <TableCell className="text-center font-bold min-w-[100px] sm:min-w-[120px]">
+                  0
                 </TableCell>
-              ))}
+              ) : (
+                gameState.players.map((player) => (
+                  <TableCell key={player.id} className="text-center font-bold min-w-[100px] sm:min-w-[120px]">
+                    {getPlayerTotal(player.id)}
+                  </TableCell>
+                ))
+              )}
             </TableRow>
           </TableBody>
         </Table>
