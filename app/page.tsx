@@ -4,20 +4,23 @@ import { useGameState } from '@/hooks/useGameState';
 import { AddPlayer } from '@/components/AddPlayer';
 import { ScoreTable } from '@/components/ScoreTable';
 import { ResetGameDialog } from '@/components/ResetGameDialog';
+import { GameRules } from '@/components/GameRules';
 
 export default function Home() {
   const { gameState, addPlayer, addRound, updateScore, resetGame, getPlayerTotal } = useGameState();
 
   return (
     <main className="min-h-screen">
-      <div className="container mx-auto py-8 px-4">
+      <div className="container mx-auto py-8 px-4 min-h-[800px]">
         <h1 className="sm:text-2xl text-2xl font-bold mb-8 max-w-[250px]">Contador de puntos para Continental 🃏</h1>
         
         <div className="space-y-8">
-          <div className="space-y-4">
-            <h2 className="text-xl font-semibold">Jugadores</h2>
-            <AddPlayer onAddPlayer={addPlayer} />
-          </div>
+          {gameState.rounds.length < 3 && (
+            <div className="space-y-4">
+              <h2 className="text-xl font-semibold">Jugadores</h2>
+              <AddPlayer onAddPlayer={addPlayer} />
+            </div>
+          )}
 
           {gameState.players.length === 0 ? (
             <div className="text-center p-4 text-gray-500">
@@ -26,7 +29,7 @@ export default function Home() {
           ) : (
             <div className="space-y-4">
               <div className="flex justify-between items-center">
-                <h2 className="text-2xl font-semibold">Rondas</h2>
+                <h2 className="text-xl font-semibold">Rondas</h2>
               </div>
 
               <ScoreTable 
@@ -44,6 +47,8 @@ export default function Home() {
           )}
         </div>
       </div>
+
+      <GameRules />
     </main>
   );
 }
