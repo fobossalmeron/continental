@@ -70,7 +70,7 @@ export function useGameState() {
     };
     setGameState(prev => ({
       ...prev,
-      players: [...prev.players, newPlayer],
+      players: [newPlayer, ...prev.players],
     }));
   };
 
