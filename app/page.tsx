@@ -3,8 +3,6 @@
 import { useGameState } from '@/hooks/useGameState';
 import { AddPlayer } from '@/components/AddPlayer';
 import { ScoreTable } from '@/components/ScoreTable';
-import { Button } from '@/components/ui/button';
-import { PlusCircle } from 'lucide-react';
 import { ResetGameDialog } from '@/components/ResetGameDialog';
 
 export default function Home() {
