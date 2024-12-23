@@ -23,7 +23,7 @@ export function ResetGameDialog({ onReset }: ResetGameDialogProps) {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button variant="destructive" size="sm" className="mt-4">
+        <Button variant="destructive" size="sm" className="mt-4 ml-auto">
           <RefreshCcw className="mr-2 h-4 w-4" />
           Nueva partida
         </Button>

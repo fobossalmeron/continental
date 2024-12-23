@@ -12,9 +12,16 @@ export default function Home() {
   return (
     <main className="min-h-screen">
       <div className="container mx-auto py-8 px-4 min-h-[800px]">
-        <h1 className="sm:text-2xl text-2xl font-bold mb-8 max-w-[250px]">Contador de puntos para Continental 🃏</h1>
-        
-        <div className="space-y-8">
+        <header className="mb-8">
+          <h1 className="sm:text-3xl text-2xl font-bold max-w-[350px]">
+            Contador de puntos para Continental 🃏
+          </h1>
+          <p className="text-muted-foreground mt-2">
+            Lleva el control de tus partidas sin papel
+          </p>
+        </header>
+
+        <article className="space-y-8">
           {gameState.rounds.length < 3 && (
             <div className="space-y-4">
               <h2 className="text-xl font-semibold">Jugadores</h2>
@@ -22,7 +29,7 @@ export default function Home() {
             </div>
           )}
 
-          <div className="space-y-4">
+          <section className="space-y-4">
             <div className="flex justify-between items-center">
               <h2 className="text-xl font-semibold">Rondas</h2>
             </div>
@@ -38,11 +45,11 @@ export default function Home() {
             <div className="flex justify-center mt-8">
               <ResetGameDialog onReset={resetGame} />
             </div>
-          </div>
-        </div>
-      </div>
+          </section>
+        </article>
 
-      <GameRules />
+        <GameRules />
+      </div>
     </main>
   );
 }
