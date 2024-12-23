@@ -7,7 +7,7 @@ export default function manifest(): MetadataRoute.Manifest {
     description: 'Lleva el control de tus partidas de Continental sin papel',
     start_url: '/',
     display: 'standalone',
-    background_color: '#fafbfc',
+    background_color: 'hsl(var(--background))',
     theme_color: '#2BEE4A',
     orientation: 'portrait',
     icons: [

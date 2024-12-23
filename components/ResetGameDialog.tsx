@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/dialog";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { RefreshCcw, RotateCcw } from "lucide-react";
+import { RefreshCcw } from "lucide-react";
 
 interface ResetGameDialogProps {
   onReset: () => void;

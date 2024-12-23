@@ -6,26 +6,32 @@ import { AddIcon } from "@/components/icons/AddIcon";
 import { Button } from "@/components/ui/button"
 import { ShareIcon } from "@/components/icons/ShareIcon";
 
+// Añadimos la interfaz para el evento de instalación
+interface BeforeInstallPromptEvent extends Event {
+  prompt: () => Promise<void>;
+  userChoice: Promise<{ outcome: 'accepted' | 'dismissed' }>;
+}
+
 export function InstallPrompt() {
   const [isIOS, setIsIOS] = useState(false)
   const [isStandalone, setIsStandalone] = useState(false)
-  const [deferredPrompt, setDeferredPrompt] = useState<any>(null)
+  const [deferredPrompt, setDeferredPrompt] = useState<BeforeInstallPromptEvent | null>(null)
   const [showInstallDialog, setShowInstallDialog] = useState(false)
 
   useEffect(() => {
-    // Detectar si es iOS
-    setIsIOS(/iPad|iPhone|iPod/.test(navigator.userAgent) && !(window as any).MSStream)
+    // Detectar si es iOS usando Window interface
+    setIsIOS(/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream)
     
     // Verificar si ya está instalada
     setIsStandalone(window.matchMedia('(display-mode: standalone)').matches)
 
     // Capturar evento beforeinstallprompt para navegadores que lo soportan
-    const handleBeforeInstallPrompt = (e: Event) => {
+    const handleBeforeInstallPrompt = (e: BeforeInstallPromptEvent) => {
       e.preventDefault()
       setDeferredPrompt(e)
     }
 
-    window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt)
+    window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt as EventListener)
 
     // Mostrar el modal después de 10 segundos si no está instalada
     const timer = setTimeout(() => {
@@ -35,7 +41,7 @@ export function InstallPrompt() {
     }, 10000)
 
     return () => {
-      window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt)
+      window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt as EventListener)
       clearTimeout(timer)
     }
   }, [isStandalone])
@@ -57,7 +63,7 @@ export function InstallPrompt() {
     <Dialog open={showInstallDialog} onOpenChange={setShowInstallDialog}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Instalar app</DialogTitle>
+          <DialogTitle>¿Quieres instalar la app?</DialogTitle>
           <DialogDescription>
             {isIOS ? `Sigue estos pasos para instalar la app en tu iOS:` : 'Instala la aplicación para una mejor experiencia'}
           </DialogDescription>
