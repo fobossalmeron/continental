@@ -15,11 +15,17 @@ interface BeforeInstallPromptEvent extends Event {
 export function InstallPrompt() {
   const [isIOS, setIsIOS] = useState(false)
   const [isStandalone, setIsStandalone] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
   const [deferredPrompt, setDeferredPrompt] = useState<BeforeInstallPromptEvent | null>(null)
   const [showInstallDialog, setShowInstallDialog] = useState(false)
 
   useEffect(() => {
-    // Detectar si es iOS usando Window interface
+    // Detectar si es móvil
+    const checkIsMobile = () => {
+      setIsMobile(window.innerWidth <= 768)
+    }
+    
+    // Detectar si es iOS
     setIsIOS(/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream)
     
     // Verificar si ya está instalada
@@ -31,20 +37,26 @@ export function InstallPrompt() {
       setDeferredPrompt(e)
     }
 
+    // Verificar inicialmente si es móvil
+    checkIsMobile()
+
+    // Escuchar cambios en el tamaño de la ventana
+    window.addEventListener('resize', checkIsMobile)
     window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt as EventListener)
 
-    // Mostrar el modal después de 10 segundos si no está instalada
+    // Mostrar el modal después de 10 segundos si no está instalada y es móvil
     const timer = setTimeout(() => {
-      if (!isStandalone) {
+      if (!isStandalone && isMobile) {
         setShowInstallDialog(true)
       }
     }, 10000)
 
     return () => {
+      window.removeEventListener('resize', checkIsMobile)
       window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt as EventListener)
       clearTimeout(timer)
     }
-  }, [isStandalone])
+  }, [isStandalone, isMobile])
 
   const handleInstallClick = async () => {
     if (!deferredPrompt) return
@@ -56,8 +68,8 @@ export function InstallPrompt() {
     setShowInstallDialog(false)
   }
 
-  // No mostrar nada si ya está instalada
-  if (isStandalone) return null
+  // No mostrar nada si ya está instalada o no es móvil
+  if (isStandalone || !isMobile) return null
 
   return (
     <Dialog open={showInstallDialog} onOpenChange={setShowInstallDialog}>
