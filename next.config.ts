@@ -39,6 +39,15 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+  async redirects() {
+    return [
+      {
+        source: '/ads.txt',
+        destination: 'https://srv.adstxtmanager.com/19390/contadorcontinental.com',
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;
