@@ -7,7 +7,6 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import type { GameState, Player, Round } from "@/types/game";
 
 const rounds = [
   { round: "1ª", combination: "Dos tercias", cards: 7 },
