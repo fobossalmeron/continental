@@ -42,6 +42,30 @@ export default function RootLayout({
   return (
     <html lang="es">
       <head>
+        {/* Scripts de privacidad de Ezoic */}
+        <Script
+          src="https://cmp.gatekeeperconsent.com/min.js"
+          data-cfasync="false"
+          strategy="beforeInteractive"
+        />
+        <Script
+          src="https://the.gatekeeperconsent.com/cmp.min.js"
+          data-cfasync="false"
+          strategy="beforeInteractive"
+        />
+        {/* Script principal de Ezoic */}
+        <Script
+          async
+          src="//www.ezojs.com/ezoic/sa.min.js"
+          strategy="beforeInteractive"
+        />
+        <Script id="ezoic-init" strategy="beforeInteractive">
+          {`
+            window.ezstandalone = window.ezstandalone || {};
+            ezstandalone.cmd = ezstandalone.cmd || [];
+          `}
+        </Script>
+        {/* Fin scripts Ezoic */}
         <meta
           name="apple-mobile-web-app-status-bar-style"
           content="black-translucent"

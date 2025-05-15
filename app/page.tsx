@@ -5,6 +5,7 @@ import { AddPlayer } from "@/components/AddPlayer";
 import { ScoreTable } from "@/components/ScoreTable";
 import { ResetGameDialog } from "@/components/ResetGameDialog";
 import { GameRules } from "@/components/GameRules";
+import Script from "next/script";
 
 export default function Home() {
   const {
@@ -26,6 +27,10 @@ export default function Home() {
           <p className="text-muted-foreground mt-2 text-sm">
             Lleva los puntos de tus partidas sin papel.
           </p>
+          <div id="ezoic-pub-ad-placeholder-102"></div>
+          <Script id="ezoic-ad-102" strategy="afterInteractive">
+            {`ezstandalone.cmd.push(function() { ezstandalone.showAds(102); });`}
+          </Script>
         </header>
 
         <article className="space-y-8">
@@ -56,6 +61,14 @@ export default function Home() {
         </article>
 
         <GameRules />
+        <div id="ezoic-pub-ad-placeholder-103"></div>
+        <Script id="ezoic-ad-103" strategy="afterInteractive">
+          {`
+            ezstandalone.cmd.push(function() {
+              ezstandalone.showAds(103);
+            });
+          `}
+        </Script>
       </div>
     </main>
   );
