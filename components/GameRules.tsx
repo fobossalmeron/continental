@@ -9,20 +9,20 @@ import {
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 
 const rounds = [
-  { round: "1ª", combination: "Dos tercias", cards: 7 },
-  { round: "2ª", combination: "Una tercia y una escalera", cards: 8 },
-  { round: "3ª", combination: "Dos escaleras", cards: 9 },
-  { round: "4ª", combination: "Tres tercias", cards: 10 },
-  { round: "5ª", combination: "Dos tercias y una escalera", cards: 11 },
-  { round: "6ª", combination: "Una tercia y dos escaleras", cards: 12 },
-  { round: "7ª", combination: "Tres escaleras", cards: 13 },
+  { round: "1ª", combination: "Dos tercias", cards: 6 },
+  { round: "2ª", combination: "Una tercia y una escalera", cards: 7 },
+  { round: "3ª", combination: "Dos escaleras", cards: 8 },
+  { round: "4ª", combination: "Tres tercias", cards: 9 },
+  { round: "5ª", combination: "Dos tercias y una escalera", cards: 10 },
+  { round: "6ª", combination: "Una tercia y dos escaleras", cards: 11 },
+  { round: "7ª", combination: "Tres escaleras", cards: 12 },
 ];
 
 const cardValues = [
   { type: "Comodín", value: 50 },
   { type: "As", value: 20 },
-  { type: "Figuras (Rey, Reina, Joto)", value: 10 },
-  { type: "Cartas numéricas (10-2)", value: "Valor de la carta" },
+  { type: "Del 8 al Rey", value: 10 },
+  { type: "Del 2 al 7", value: 5 },
 ];
 
 export function GameRules() {
